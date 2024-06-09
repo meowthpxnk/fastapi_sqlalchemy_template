@@ -1,9 +1,41 @@
-# from logging.config import fileConfig
-from app.logger import Logger
+from MeowthLogger import Logger
+from MeowthLogger.logger.config import MainLoggerConfig
+from MeowthLogger.logger.config.utils import ConfigLogger
 
 
-l = Logger()
-l.info("123")
+class Logger(Logger):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    @property
+    def __config(self) -> dict:
+        config = MainLoggerConfig(self.settings)
+
+        config.loggers.append(
+            ConfigLogger(
+                name="alembic",
+                level=config.settings.logger_level,
+                handlers=config.handlers,
+                propagate=False,
+            )
+        )
+
+        config.loggers.append(
+            ConfigLogger(
+                name="sqlalchemy.engine",
+                level=config.settings.logger_level,
+                handlers=config.handlers,
+                propagate=False,
+            )
+        )
+
+        return config.json()
+
+
+logger = Logger(
+    use_uvicorn=True,
+    logger_level="INFO",
+)
 
 from alembic import context
 from sqlalchemy import engine_from_config, pool
@@ -35,7 +67,7 @@ def run_migrations_offline() -> None:
 
     """
     context.configure(
-        url=settings.database_uri,
+        url=settings.db.uri,
         target_metadata=target_metadata,
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},
@@ -53,7 +85,7 @@ def run_migrations_online() -> None:
 
     """
     cfg = config.get_section(config.config_ini_section, {})
-    cfg.update({"sqlalchemy.url": settings.database_uri})
+    cfg.update({"sqlalchemy.url": settings.db.uri})
 
     connectable = engine_from_config(
         cfg,
