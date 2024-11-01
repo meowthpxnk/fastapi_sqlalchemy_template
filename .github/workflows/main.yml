@@ -26,5 +26,5 @@ jobs:
             - name: Run pre-commit hooks
               run: pre-commit run --all-files --verbose
 
-            - name: List files
-              run: ls -R # Список всех файлов в текущем каталоге
+            - name: F8
+              run: flake8 --config ./.flake8 --verbose --show-source .
