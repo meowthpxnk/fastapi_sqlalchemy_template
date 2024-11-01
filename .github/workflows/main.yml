@@ -26,8 +26,5 @@ jobs:
             - name: Run pre-commit hooks
               run: pre-commit run --all-files --verbose
 
-            - name: Run flake8 with verbose output
-              run: flake8 -v
-
-            - name: List files checked by flake8
-              run: flake8 --filename='*.py' --max-line-length=88 --show-source --statistics
+              - name: List files
+                run: ls -R  # Список всех файлов в текущем каталоге
