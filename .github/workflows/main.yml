@@ -28,3 +28,5 @@ jobs:
 
             - name: F8
               run: pwd && ls
+            - name: F8
+              run: ls .flake8
