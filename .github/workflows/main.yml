@@ -24,7 +24,7 @@ jobs:
               run: flake8 --verbose
 
             - name: Run pre-commit hooks
-              run: pre-commit run --all-files
+              run: pre-commit run --all-files --verbose
 
             - name: Run flake8 with verbose output
               run: flake8 -v
