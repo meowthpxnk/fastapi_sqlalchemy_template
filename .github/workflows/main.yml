@@ -15,13 +15,13 @@ jobs:
         with:
           python-version: '3.12'  # Python version set to 3.12
 
-      - name: Run flake8
-        run: flake8 --verbose
-
       - name: Install pre-commit
         run: |
           pip install pre-commit flake8 black isort
           pre-commit install
+
+      - name: Run flake8
+        run: flake8 --verbose
 
       - name: Run pre-commit hooks
         run: pre-commit run --all-files
