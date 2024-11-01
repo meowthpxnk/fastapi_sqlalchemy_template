@@ -13,22 +13,12 @@ jobs:
             - name: Set up Python
               uses: actions/setup-python@v2
               with:
-                  python-version: "3.12" # Python version set to 3.12
+                  python-version: "3.12"
 
             - name: Install pre-commit
               run: |
-                  pip install pre-commit flake8 black isort
+                  pip install pre-commit flake8 flake8-annotations black isort
                   pre-commit install
-
-            - name: Run flake8
-              run: flake8 --verbose
 
             - name: Run pre-commit hooks
               run: pre-commit run --all-files --verbose
-
-            - name: F8
-              run: pwd && ls
-            - name: F8
-              run: flake8 --config ./.flake8 ./app/api/config.py --verbose
-            - name: f7
-              run: cat ./app/api/config.py
