@@ -29,4 +29,4 @@ jobs:
             - name: F8
               run: pwd && ls
             - name: F8
-              run: flake8 --config ./.flake8 ./app/api/config.py
+              run: flake8 --config ./.flake8 ./app/api/config.py --verbose
