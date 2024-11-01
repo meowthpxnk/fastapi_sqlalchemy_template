@@ -26,5 +26,5 @@ jobs:
             - name: Run pre-commit hooks
               run: pre-commit run --all-files --verbose
 
-              - name: List files
-                run: ls -R  # Список всех файлов в текущем каталоге
+            - name: List files
+              run: ls -R # Список всех файлов в текущем каталоге
