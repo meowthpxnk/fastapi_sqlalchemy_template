@@ -15,8 +15,8 @@ jobs:
         with:
           python-version: '3.12'  # Python version set to 3.12
 
-      - name: List files in the repository
-        run: find . -type f
+      - name: Run flake8
+        run: flake8 --verbose
 
       - name: Install pre-commit
         run: |
