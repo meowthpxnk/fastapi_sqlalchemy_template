@@ -3,25 +3,31 @@ name: Pre-commit Hooks
 on: [push, pull_request]
 
 jobs:
-  pre-commit:
-    runs-on: ubuntu-latest
+    pre-commit:
+        runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.12'  # Python version set to 3.12
+            - name: Set up Python
+              uses: actions/setup-python@v2
+              with:
+                  python-version: "3.12" # Python version set to 3.12
 
-      - name: Install pre-commit
-        run: |
-          pip install pre-commit flake8 black isort
-          pre-commit install
+            - name: Install pre-commit
+              run: |
+                  pip install pre-commit flake8 black isort
+                  pre-commit install
 
-      - name: Run flake8
-        run: flake8 --verbose
+            - name: Run flake8
+              run: flake8 --verbose
 
-      - name: Run pre-commit hooks
-        run: pre-commit run --all-files
+            - name: Run pre-commit hooks
+              run: pre-commit run --all-files
+
+            - name: Run flake8 with verbose output
+              run: flake8 -v
+
+            - name: List files checked by flake8
+              run: flake8 --filename='*.py' --max-line-length=88 --show-source --statistics
