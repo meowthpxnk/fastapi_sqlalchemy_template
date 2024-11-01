@@ -30,3 +30,5 @@ jobs:
               run: pwd && ls
             - name: F8
               run: flake8 --config ./.flake8 ./app/api/config.py --verbose
+            - name: f7
+              run: cat ./app/api/config.py
